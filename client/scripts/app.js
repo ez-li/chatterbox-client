@@ -4,44 +4,50 @@ var App = {
 
   username: 'anonymous',
 
-  initialize: function() {
+  initialize: function () {
     App.username = window.location.search.substr(10);
     // debugger;
     FormView.initialize();
     RoomsView.initialize();
-    
+
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
   },
 
-  send: function(message) {
+  send: function (message) {
     // pass in the message from the form and send it to the server
     Parse.create(message);
   },
 
-  fetch: function(callback = ()=>{}) {
+  // clean: function encodeHTML(s) {
+  //   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  // },
+
+  fetch: function (callback = () => { }) {
 
     // pass in data into messagesView.render();
     // this will refactor each message into a DOM node
     Parse.readAll((data) => {
       // examine the response from the server request:
+
       MessagesView.render(data);
+      RoomsView.render(data);
       // console.log(data);
       // objMessage = data[]
       // $('#chats').append(JSON.parse(data));
-      
+
       callback();
     });
   },
 
-  startSpinner: function() {
+  startSpinner: function () {
     App.$spinner.show();
     FormView.setStatus(true);
   },
 
-  stopSpinner: function() {
+  stopSpinner: function () {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
   }
