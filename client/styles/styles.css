@@ -49,7 +49,6 @@ body {
 form {
     padding: 20px;
     padding-left: 0;
-    margin-bottom: 20px;
 }
 
 form input[type=text] {
@@ -60,10 +59,16 @@ form input[type=text] {
 }
 
 .chat {
-    padding: 5px;
+    padding: 10px;
     margin-bottom: 5px;
     background-color: #eee;
+    border-radius: 10px;
+    transition: all 0.5s;
 }
+
+/*.chat:hover {
+    height: 10px;
+}*/
 
 .chat .username {
     font-weight: 800;
